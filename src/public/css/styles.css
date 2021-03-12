@@ -1,0 +1,72 @@
+
+body {
+    background: #F4F4F4;
+    font-family: 'Century Gothic',sans-serif;
+}
+
+.index{
+    width: 100%;
+    height: 100%;
+}
+.masthead{
+    color: white;
+    min-height:  40em;
+    width: 100%;
+    height: 100%;
+    padding-top: 8rem;
+    background: url('/img/fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.textarea {
+    background-color: #F4F4F4;
+    overflow:auto;
+    margin-bottom: 15px;
+}
+div.yellowI::selection{
+    background-color: #BE42ED;
+    color: white;
+}
+.lblSpan:hover{
+    cursor: pointer;
+    border: 1px dotted #fa0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #aaa;
+}
+.sectionInterview{
+    height:35rem;
+}
+
+.submitFilter{
+    background: lightgreen;
+}
+.submitFilter:hover{
+    background: lightsteelblue;
+}
+
+.loading{
+            width: 200px;
+            color: black;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .loading:before{
+        content: '';
+        animation: load 15s linear ;
+    }
+.loading:before{
+    content: 'Archivo cargado';
+    font-size: 15px;
+}
+@keyframes load{
+    0%{content: 'Cargando archivo';}
+    10%{content: 'Cargando archivo.';}
+    20%{content: 'Cargando archivo..';}
+    30%{content: 'Cargando archivo...';}
+    40%{content: 'Cargando archivo....';}
+    50%{content: 'Cargando archivo.....';}
+    60%{content: 'Cargando archivo......';}
+    70%{content: 'Cargando archivo.......';}
+    80%{content: 'Cargando archivo........';}
+    85%{content: 'Archivo cargado';}
+}

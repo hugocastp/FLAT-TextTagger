@@ -1,0 +1,26 @@
+
+<div class="container p-4">
+    <div class="row">
+        {{#each tags}}
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body" style="border-right: {{color}} 5px solid;border-radius:5px;">
+                    <h3 class="card-title text-uppercase">
+                        {{title}}
+                    </h3>
+                    <a href="/tags/delete/{{id_cat_tag}}" class="btn btn-danger mt-3">Eliminar</a>
+                    <a href="/tags/edit/{{id_cat_tag}}" class="btn btn-secondary mt-3">Editar</a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card cardbody text-center">
+                    <p>No existen categorías aún</p>
+                    <a href="/tags/add">Crea una</a> 
+                </div>
+            </div>
+        {{/each}}
+
+    </div>
+</div>

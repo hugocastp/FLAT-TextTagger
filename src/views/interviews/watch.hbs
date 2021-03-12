@@ -1,0 +1,104 @@
+<div>
+  <div class="container d-block">
+   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownOrder"
+        aria-controls="navbarNavDropdownOrder" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdownOrder">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Download
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownDown">
+              <a class="dropdown-item" href="/interviews/Download/TagsFromInterview/{{idInterview}}">Tags</a>
+              <a class="dropdown-item" href="/interviews/Download/Interview/{{idInterview}}">Interview (Clean)</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/interviews/Download/Filtered/{{idInterview}}">Filtered Tags</a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDownFiltered" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tags of category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownDownFiltered">
+
+                {{#each categoriesDialog as |category|}}
+                <a class="dropdown-item"
+                  href="/interviews/Download/FilteredTagsFromInterview/{{category.title}}">{{category.title}}</a>
+                {{else}}
+                <a class="dropdown-item" href="#">No Categories</a>
+                {{/each}}
+              </div>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTags" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Filter category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownTags">
+              <form action="{{idInterview}}" method="POST">
+                <button type="submit" class="dropdown-item submitFilter">Submit</button>
+                {{#each categoriesDialog as |category|}}
+                <input type="checkbox" class="form-check-input" id="Check{{category.title}}" name="{{category.title}}">
+                <label class="dropdown-item form-check-label" for="Check{{category.title}}">
+                  {{category.title}}
+                </label>
+                {{else}}
+                <a class="dropdown-item" href="#">No Categories</a>
+                {{/each}}
+              </form>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="btn" href="{{idInterview}}">Reload</a>
+          </li>
+        </ul>
+      </div>
+    </nav>-->
+      <div class="row mt-4">
+      <div class="col">
+        <div class="card">
+          <h3 class="text-center p-4">Texto <span id='IdItrviewHolder'>{{idInterview}}</span></h3>
+        </div>
+        <div class="overflow-auto" id="contTextArea">
+          <div class="sectionInterview">
+            <div id="text_html">
+              <div id="root"></div>
+              {{#each interview as |portion|}}
+              <div class="yellow{{portion.person}}" name="{{portion.person}}" id="line{{portion.line}}">{{portion.person}}: {{portion.content}}</div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-4">
+        <div class="row">
+          {{> addTagsMenu}}
+        </div>
+        <div class="row">
+          <div class="card ">
+            <div class="card-body ">
+              <form action="/addtag" method="POST" style="width: 20em">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="tagscollection">Etiquetado actual</label>
+                    <select multiple class="form-control" name="tagscollection" id="tagscollection">
+                      {{#each tags as |tag|}}
+                      <option value="{{tag.startpos}}" style="color: {{tag.color}};">{{tag.title}} {{tag.sentence}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <script src="/js/interviews/watch.js">
+  </script>
+</div>

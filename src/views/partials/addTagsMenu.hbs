@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-body" id="fullWatch">
+        <div>
+            
+            <h3 class="text-center p-3">Categorías</h3>
+        </div>
+        <form action="/interviews/addtag" method="POST" id="frmAddTagMenu" style="width: 20em">
+            <div class="form-group">
+                <label for="optCategory">Categoría</label>
+                <select class="custom-select" name="optCategory" id="optCategory">
+                    <option selected disabled="true">Seleccione</option>
+                    {{#each categories as |category|}}
+                    <option value="{{category.color}}">{{category.title}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea name="contents" class="form-control" rows="2" placeholder="Contenido" id="result" disabled="true"></textarea>
+            </div>
+            <!--<div class="form-group" id="ctrTitle">
+                <input type="text" class="form-control" id="inpTitle" placeholder="Title">
+            </div>-->
+            <div class="form-group">
+                <label for="selectedColor">Color de etiqueta</label>
+                <input type="color" name="selectedColor" id="selectedColor" class="form-control" value="#FFFFFF">
+            </div>
+            <div class="" style="float: right">
+                <div class="btn btn-default" id="btnSave" style="background-color: #50CF62; color: white; object-position: center" id="addColor">
+                    Guardar
+                </div>
+                <div class="btn btn-default" style="background-color: #BE42ED; color: white" id="addColor">
+                    Etiquetar
+                </div>
+            </div>
+            <div class="state" id="stateAjax">
+            </div>
+        </form>
+
+    </div>
+    
+</div>

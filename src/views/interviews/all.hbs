@@ -1,0 +1,104 @@
+
+<style>
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 0 20%;
+  position: relative;
+  margin: .5em;
+  padding: 1em;
+  background: white;
+  border: 1px solid grey;
+}
+
+.active { border-color: orangered; }
+
+/* This is where the magic happens */
+input[type="checkbox"] {
+  position: absolute;
+  top: .5em;
+  left:.5em;
+}
+
+@media (pointer: coarse) { 
+  input[type="checkbox"] {
+    height: 2em;
+    width: 2em;
+  }
+}
+
+/* Use z-index to make it accessible to keyboard navigation */
+@media (hover: hover) {
+              input[type="checkbox"] { z-index: -1 }
+  .card:hover input[type="checkbox"],
+              input[type="checkbox"]:focus,
+              input[type="checkbox"]:checked { z-index: auto }
+}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/load/add" id="navbarAddData" role="button">
+            Seleccionar
+          </a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/load/add" id="navbarAddData" role="button">
+            Agregar datos
+          </a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Categorías
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/tags">Todo </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/tags/add">Agregar </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/download/download" id="navbarAddData" role="button">
+            Descargar datos
+          </a>
+        </li>
+ 
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container p-4">
+    <div class="row">
+        {{#each Interviews}}
+        <div class="col-md-3">
+         <div class="card text-center">
+     <a href="/interviews/watch/{{idDialogInterview}}" style="color: #BE42ED">
+                        <h4 class="card-title" style="color: #BE42ED; font-size: 1em">
+                            Texto {{idDialogInterview}}
+                        </h4>
+                    </a>
+                  
+  </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card cardbody text-center">
+                <p>Aún no hay registros cargados</p>
+                <a href="/load/add">Cargar datos</a>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+</div>
+

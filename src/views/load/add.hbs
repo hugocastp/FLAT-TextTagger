@@ -1,0 +1,44 @@
+
+</style>
+<div class="container" p-4>
+    
+    <div class="row">
+        
+        <div class="col-md-6 mx-auto">
+            <div id = "alert_placeholder"></div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title text-uppercase">
+                        Cargar datos
+                    </h3>
+                    <form action="/load/add" name="load_data" id="load_data" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            1. Cargar archivo<br>
+                            <label class="btn btn-primary btn-block" for="filename">Seleccione archivo</label>
+                            <div id="loading"></div>
+                            <b><input type="input" name="fnamemsg" id="fnamemsg" hidden="false">{{file_msg}} 
+                            <input type="input" name="fnameshort" id="fnameshort" hidden="false">{{file_short}}<br><br></b>
+                            <label for="opts">2. Seleccionar el campo a subir</label>
+                            <select class="custom-select" name="opts" id="opts">
+                                <option selected disabled="true">Cargar archivo previamente para visualizar</option>
+                                {{#each results as |result|}}
+                                <option>{{result}}</option>
+                                {{/each}}
+                            </select>
+                            <br><br>
+                            <button class="btn btn-success btn-block" id="save" value="save">
+                                Guardar
+                            </button>
+                            <input type="input" name="fname" id="fname" value="{{file}}" hidden="true" required>
+                            <input type="file" style="visibility:hidden;" name="filename" id="filename" onchange="loadheaders();" accept=".xls,.xlsx,.tsv,.json,.csv,.xlsm,.xlsb"><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+    <script src="/js/interviews/load.js"></script>
+    
+   
+</div>
