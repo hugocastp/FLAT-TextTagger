@@ -1,5 +1,5 @@
 
-var host = 'localhost'
+var host = 'db'
 var user = 'pablohoney'
 var password = 'Pikachuy1-'
 var database = 'AustenRiggs'

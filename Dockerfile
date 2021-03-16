@@ -1,4 +1,4 @@
-FROM node:12-alpine3.10
+FROM node:12
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -12,6 +12,8 @@ RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 install pandas python-shell mysql-connector-python openpyxl nested-lookup
 # Bundle app source
 COPY . .
 

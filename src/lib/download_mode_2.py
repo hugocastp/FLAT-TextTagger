@@ -137,7 +137,7 @@ def renombrar_docu(tipo, nombre):
 
 def consultar_bd(qry):
     try:
-        connection = mysql.connector.connect(host='localhost',
+        connection = mysql.connector.connect(host='db',
                                              database='AustenRiggs',
                                              user='pablohoney',
                                              password='Pikachuy1-')

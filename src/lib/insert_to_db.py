@@ -15,7 +15,7 @@ def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
     insertados = 0
     # print(archivo,hash_file)
     try:
-        connection = mysql.connector.connect(host='localhost',
+        connection = mysql.connector.connect(host='db',
                                              database='AustenRiggs',
                                              user='pablohoney',
                                              password='Pikachuy1-')
