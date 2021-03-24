@@ -187,9 +187,9 @@ function addNewTag(tags, srcElement, category, color) {
     var firstPart = sentence.substr(0, parseInt(position));
     var lastPart = sentence.substr(parseInt(position)+selectedText.length);
     sentence = firstPart + " " + position + " " + lastPart;
-    //console.log(firstPart)
-    //console.log(lastPart)
-    //console.log(sentence)
+    console.log("PRIMERA PARTE "+firstPart)
+    console.log("SEGUNDA PARTE "+lastPart)
+    console.log("SENTENCIA "+sentence)
     /*for (p=0; p < sentence.length; p++){
       if (p == parseInt(position)-1){
 
@@ -197,6 +197,7 @@ function addNewTag(tags, srcElement, category, color) {
     }*/
     //sentence = sentence.replace(selectedText," "+position + " ");
   }
+  
   formatText(sentence, current_tags, category, 1);
 }
 
