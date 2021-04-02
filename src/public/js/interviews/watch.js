@@ -8,9 +8,6 @@ var cont = 0;
 var tag_added = [];
 var all_tags = [];
 var refresh = 0;
-var start = null;
-var end = null;
-var names_tags = [];
 //var first_time = 0;
 
 //sentence = document.getElementById('line0')
@@ -45,54 +42,15 @@ function getFullWatch() {
 function getText(){
   return document.getElementById("line");
 }
-
-// Funciones que obtienen el texto seleccionado y lo buscan en los spans existentes para localizar su posición exacta
-
-function findRangeOfSel(el, sel){
-  let range = [];
-  range[0] = findIndexOfSymbol(el, sel.focusNode, sel.focusOffset);
-  range[1] = findIndexOfSymbol(el, sel.anchorNode, sel.anchorOffset);
-  console.log(range);
-  range.sort((a,b) => a - b); //rtl or ltr selection gives same result
-  return range;
-}
-
-function findIndexOfSymbol(el, node, offset){
-  try{
-    node = node.parentNode == el ? node : node.parentNode;
-    //console.log(node)
-    let nodes = [...el.childNodes];
-    //console.log(nodes)
-    let index = nodes.indexOf(node);
-    //console.log(index)
-    let num = 0;
-    for (let i=0; i < index; i++){
-      //console.log(nodes[i].textContent, nodes[i].textContent.length)
-      num += nodes[i].textContent.length-1;
-      //console.log(nodes[i].textContent, nodes[i].textContent.length-1)
-    }
-    return num + offset;
-  }catch (error){
-    console.error(error);
-  }
-}
-
-//Funcion que recibe el uso de la seleccion del texto
-function getSelectedText(element) {
-  let sel = window.getSelection();
-  let p = getText();
-  var pos = findRangeOfSel(p, sel); // THE RANGE
-  start = pos[0]-1;
-  end = pos[1]-1;
-  console.log(start,end);
+function getSelectedText(eventArgs) {
+  
   var text = window.getSelection().toString();
   text = text.trim();
+  console.log(text)
   getResultArea().innerHTML = text;
   //eventArgs.srcElement.innerText = text
   //endSpan = eventArgs.srcElement;
 }
-
-//Funcion que procesa el texto cada que se etiqueta
 function reProcessText() {
 
   //globals ref
@@ -118,17 +76,14 @@ function reProcessText() {
   //tag_added = []
   //console.log(current_tags.length)
   texto = getText().innerText;
-  //position = texto.indexOf(selectedText.trim());
-  position = start;
-  //console.log(position)
-  //console.log(category)
-  t = [selectedText,color,position,category]
+  position = texto.indexOf(selectedText.trim());
+  t = [selectedText,color,position]
   tag_added.push(t)
-  //console.log("Se añadio etiqueta")
+  console.log("Se añadio etiqueta")
   //console.log(tag_added)
   addNewTag(tag_added, null, category, color);
   //Adding to lists
-  addTagTocollection(category, idInterview, "0", selectedText, color, position);  
+  addTagTocollection(category, idInterview, "0", selectedText, color);  
 }
 function addNewTag(tags, srcElement, category, color) {
   //console.log(category)
@@ -140,7 +95,7 @@ function addNewTag(tags, srcElement, category, color) {
     current_tags = all_tags.concat(tags)
     //console.log(current_tags)
   }
-  //console.log(current_tags)
+
   list = document.getElementById('tagscollection');
   //console.log(list.options)
   for (j=0; j < current_tags.length; j++){
@@ -155,7 +110,6 @@ function addNewTag(tags, srcElement, category, color) {
           }
         }
       if (appears == 0){
-        //console.log(current_tags[j][3])
         document.getElementById('tagscollection').appendChild(createOpt(category, current_tags[j][0].substring(0, 20), color));
       }
     }
@@ -177,74 +131,42 @@ function addNewTag(tags, srcElement, category, color) {
   }
 
   sentence = getText().innerText;
-  //console.log(current_tags);
+  srcElement = getText();
+  srcElement.innerHTML = "";
+
   for (i=0; i < current_tags.length; i++){
     t = current_tags[i]
     selectedText = t[0];
     color = t[1];
     position = t[2];
-    //console.log(selectedText)
-    var firstPart = sentence.substr(0, parseInt(position));
-    var lastPart = sentence.substr(parseInt(position)+selectedText.length);
-    sentence = firstPart + " " + position + " " + lastPart;
-    console.log("PRIMERA PARTE "+firstPart)
-    console.log("SEGUNDA PARTE "+lastPart)
-    console.log("SENTENCIA "+sentence)
-    /*for (p=0; p < sentence.length; p++){
-      if (p == parseInt(position)-1){
-
-      }
-    }*/
-    //sentence = sentence.replace(selectedText," "+position + " ");
+    sentence = sentence.replace(selectedText," "+ position + " ");
   }
-  
-  formatText(sentence, current_tags, category, 1);
-}
-
-function formatText(sentence, current_tags, category, mode){
-  //console.log(names_tags);
-  //console.log(category)
-  //console.log(current_tags)
+  //console.log(sentence)
   parts = sentence.split(" ");
   //console.log(parts)
-  srcElement = getText();
-  srcElement.innerHTML = "";
-  if (mode == 1){
-    /*if (category != null){
-      current_tags.push(category);
-    }*/
-    for (j=0; j < parts.length; j++){
-      ban=0;
-      p = document.createElement("span");
-      for (i=0; i < current_tags.length; i++){
-        t = current_tags[i]
-        //console.log(t)
-        selectedText = t[0];
-        color = t[1];
-        position = t[2];
-        if (position == parts[j]){
-          var span = createSpanForTaggedText(current_tags[i][0], current_tags[i][1], current_tags[i][3]);
-          srcElement.appendChild(span);
-          ban=1;
-          break;
-        }
-      }
-      if (ban==0){
-        p.innerText = " "+parts[j] + " ";
-        srcElement.appendChild(p);
+
+  for (j=0; j < parts.length; j++){
+    ban=0;
+    p = document.createElement("span");
+    for (i=0; i < current_tags.length; i++){
+      t = current_tags[i]
+      selectedText = t[0];
+      color = t[1];
+      position = t[2];
+      if (position == parts[j]){
+        var span = createSpanForTaggedText(current_tags[i][0], current_tags[i][1], category);
+        srcElement.appendChild(span);
+        ban=1;
+        break;
       }
     }
-  }else{
-    for (j=0; j < parts.length; j++){
-      ban=0;
-      p = document.createElement("span");
+    if (ban==0){
       p.innerText = " "+parts[j] + " ";
       srcElement.appendChild(p);
     }
   }
 }
-
-function addTagTocollection(cat, idInt, _stamp, text, _color, startpos) {
+function addTagTocollection(cat, idInt, _stamp, text, _color) {
   //console.log("hola")
   //console.log(newTags)
 
@@ -261,10 +183,10 @@ function addTagTocollection(cat, idInt, _stamp, text, _color, startpos) {
       }
     }
     if (ban == 0){
-      newTags.push({ id_cat_tag: cat, idDialogInterview: idInt, stamp: "0", sentence: text, color: _color, startpos: startpos });
+      newTags.push({ id_cat_tag: cat, idDialogInterview: idInt, stamp: "0", sentence: text, color: _color });
     }
   }else{
-    newTags.push({ id_cat_tag: cat, idDialogInterview: idInt, stamp: "0", sentence: text, color: _color, startpos: startpos });
+    newTags.push({ id_cat_tag: cat, idDialogInterview: idInt, stamp: "0", sentence: text, color: _color });
   }
 }
 function randomColor() {
@@ -276,7 +198,7 @@ function createSpanForTaggedText(text, _color, category) {
   newtag.style.backgroundColor = _color;
   newtag.setAttribute('name', category);
   newtag.className = "lblSpan";
-  newtag.innerText = " "+text+" ";
+  newtag.innerText = text;
   newtag.onclick = deployMenu;
   //console.log(category)
   return newtag;
@@ -291,7 +213,7 @@ function createOpt(idCatTag, text, color) {
 function save() {
   //console.log(newTags)
   //tag_added = []
-  //console.log(getText())
+  console.log(getText())
   var spans = [];
   var tagged_text = "";
   var searchSpans = getText().children;
@@ -311,7 +233,7 @@ function save() {
   //console.log(tagged_text)
   //console.log(getText().children)
   //console.log(getText().getAttribute("name"))
-  AjaxRequest("POST", '/interviews/addTag', { newTags: newTags, tagged_text: tagged_text}, (_) => window.location.href = 'http://localhost:4000/interviews/watch/' + idInterview);
+  AjaxRequest("POST", '/interviews/addTag', { newTags: newTags, tagged_text: tagged_text}, (_) => window.location.href = 'http://localhost/interviews/watch/' + idInterview);
   refresh = 1;
 }
 
@@ -447,18 +369,15 @@ function loadTags(tagsinOpt) {
       //console.log(node)
       if(node!= undefined || ""){
         const tag= node.innerText.split(" ");
-        name_tag = tag[0];
-        //const stamp = tag[0];
-        const position = node.value;
-        const color = node.style.color;
-        const selectedText = tag.slice(1).reduce((a,c)=>a+" "+c);
-        //console.log(position)
-        srcElement = document.getElementById('line')
-        sentence = srcElement.innerText;
-        //console.log(selectedText)
-        //position = sentence.indexOf(selectedText);
-        t = [selectedText,color,position,name_tag]
-        all_tags.push(t)
+      //const stamp = tag[0];
+      const color = node.style.color;
+      const selectedText = tag.slice(1).reduce((a,c)=>a+" "+c);
+      //console.log(selectedText)
+      srcElement = document.getElementById('line')
+      sentence = srcElement.innerText;
+      position = sentence.indexOf(selectedText);
+      t = [selectedText,color,position]
+      all_tags.push(t)
       }
     }
   }
@@ -466,10 +385,7 @@ function loadTags(tagsinOpt) {
   if (all_tags.length > 0){
     refresh = 1;
     addNewTag(all_tags, srcElement,null);
-  }else{
-    sentence = getText().innerText;
-    formatText(sentence,null,null,2);
-  }
+  } 
 }
 function addEvents(html_Button_Save, html_Button, html_spans, html_optCategory) {
   //console.log(html_spans)
