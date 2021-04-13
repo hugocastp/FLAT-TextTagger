@@ -13,6 +13,7 @@ var end = null;
 var names_tags = [];
 var sentence;
 
+
 idInterview = document.getElementById('IdItrviewHolder').innerHTML;
 function getButtonSave() {
   return document.getElementById("btnSave")
@@ -117,7 +118,6 @@ function reProcessText() {
 }
 function addNewTag(tags, srcElement, category, color) {
   //console.log("FIRST SENTENCE: "+sentence);
-  //console.log("FIRST length: "+sentence.length);
   if (refresh == 1){
     current_tags = tags;
     refresh = 0;
@@ -157,7 +157,6 @@ function addNewTag(tags, srcElement, category, color) {
     }
   }
   sentence = getText().innerText;
-  //console.log(" length 1: "+sentence.length);
   srcElement = getText();
   srcElement.innerHTML = "";
   for (i=0; i < current_tags.length; i++){
@@ -166,28 +165,38 @@ function addNewTag(tags, srcElement, category, color) {
     let len = selectedText.length;//Tamanio del texto
     color = t[1]; //[1]Color
     position = t[2]; //[2]Posicion
-    /*let band = true;
-    for(let p=0; p<current_tags.length;p++){
-      if (position > current_tags[p][2] ){
-        band = false;
+  
+      //let regex = new RegExp("(.{"+position+"}).{"+len+"}", "g");
+      //let re = new RegExp(selectedText, 'g');
+      //let count = (sentence.match(re) || []);
+      var indexes = getIndicesOf(selectedText, sentence);
+      let positionCase = 0;
+      let lengCase = indexes.length;
+      console.log("INDEXES: "+indexes);
+
+      for(let j=0;j<lengCase;j++){
+        if(indexes[j]== position){
+          positionCase = j;      
+        }
+        console.log("lengCase: "+lengCase);
+        console.log("positionCase: "+positionCase);
+        console.log("indexes[]: "+indexes[positionCase]);
+        console.log("position: "+position);
       }
-    }
-    if (i==0 || band == true){// Si es la primera etiqueta*/
-      let regex = new RegExp("(.{"+position+"}).{"+len+"}", "g");
-      //sentence = sentence.replace(regex," "+"$1"+position+ " ");
-      sentence = sentence.replace(selectedText," "+ position + " ");
+        if(sentence.indexOf(selectedText) != position ) {        
+          for(let c = 0;c <= positionCase;c++){
+              sentence = sentence.replace(selectedText," "+position+" ");  
+              console.log("SE ETIQUETA: "+c);
+          }
+          for(let d = 0;d < positionCase;d++){
+              console.log("SE INVIERTE: "+d);
+              sentence = sentence.replace(" "+position+" ",selectedText);
+          }
 
-   /*}else if(band == false){// Si ya hay etiquetas 
-      console.log("entra al else");
-      let y = current_tags[(i-1)];
-      selectedText2 = y[0];// [0]Texto de la etiqueta anterior
-      let len2 = selectedText2.length;//Tamanio del texto
-      let lenpos = y[2].toString().length;
-      let resto = len2 - lenpos -3;
-
-      let regex = new RegExp("(.{"+(position-resto)+"}).{"+len+"}", "g");
-      sentence = sentence.replace(regex," "+"$1"+position+ " ");
-    }*/
+        }else if(sentence.indexOf(selectedText) == position) {
+              sentence = sentence.replace(selectedText," "+position+" ");  
+      }
+  
   }
   parts = sentence.split(" ");
   for (j=0; j < parts.length; j++){
@@ -211,6 +220,18 @@ function addNewTag(tags, srcElement, category, color) {
     }
   }
   formatText(sentence, current_tags, category, 1);
+}
+function getIndicesOf(searchStr, str, caseSensitive) {
+  var searchStrLen = searchStr.length;
+  if (searchStrLen == 0) {
+      return [];
+  }
+  var startIndex = 0, index, indices = [];
+  while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+      indices.push(index);
+      startIndex = index + searchStrLen;
+  }
+  return indices;
 }
 
 function formatText(sentence, current_tags, category, mode){
