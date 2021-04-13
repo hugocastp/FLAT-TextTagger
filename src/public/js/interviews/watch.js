@@ -172,24 +172,21 @@ function addNewTag(tags, srcElement, category, color) {
       var indexes = getIndicesOf(selectedText, sentence);
       let positionCase = 0;
       let lengCase = indexes.length;
-      console.log("INDEXES: "+indexes);
+      //console.log("INDEXES: "+indexes);
 
       for(let j=0;j<lengCase;j++){
         if(indexes[j]== position){
           positionCase = j;      
         }
-        console.log("lengCase: "+lengCase);
-        console.log("positionCase: "+positionCase);
-        console.log("indexes[]: "+indexes[positionCase]);
-        console.log("position: "+position);
+
       }
         if(sentence.indexOf(selectedText) != position ) {        
           for(let c = 0;c <= positionCase;c++){
               sentence = sentence.replace(selectedText," "+position+" ");  
-              console.log("SE ETIQUETA: "+c);
+              //console.log("SE ETIQUETA: "+c);
           }
           for(let d = 0;d < positionCase;d++){
-              console.log("SE INVIERTE: "+d);
+              //console.log("SE INVIERTE: "+d);
               sentence = sentence.replace(" "+position+" ",selectedText);
           }
 
