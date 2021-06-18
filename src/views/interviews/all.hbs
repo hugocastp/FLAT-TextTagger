@@ -37,33 +37,33 @@ input[type="checkbox"] {
               input[type="checkbox"]:focus,
               input[type="checkbox"]:checked { z-index: auto }
 }
+
+.hiddenitem{
+    display: none !important;
+}
+
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item">
-          <a class="nav-link" href="/load/add" id="navbarAddData" role="button">
+      <!--  <li class="nav-item">
+         <a class="nav-link" href="/load/add" id="navbarAddData" role="button">
             Seleccionar
           </a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/load/add" id="navbarAddData" role="button">
-            Agregar datos
-          </a>
-        </li>
-        
+        </li>-->
+            
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Categorías
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/tags">Todo </a>
+            <a class="dropdown-item" href="/tags">Todas las categorías</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/tags/add">Agregar </a>
+            <a class="dropdown-item" href="/tags/add">Nueva categoría</a>
           </div>
         </li>
         <li class="nav-item">
@@ -87,6 +87,7 @@ input[type="checkbox"] {
                             Texto {{idDialogInterview}}
                         </h4>
                     </a>
+                   <!--   <a href="/interviews/watch/delete/{{id_cat_tag}}" class="btn btn-danger mt-3">Eliminar</a>-->
                   
   </div>
         </div>

@@ -7,13 +7,13 @@
 # instancia, ya que lo que se pretende es utilizarlo bajo los
 # requisitos anteriormente descritos
 
-def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
-
+def insert_data(data_dictionary, texto, tipo, archivo, hash_file, user):
+    
     import mysql.connector
     from mysql.connector import Error
     total = 0
     insertados = 0
-    # print(archivo,hash_file)
+    #print(archivo,hash_file, user)
     try:
         connection = mysql.connector.connect(host='db',
                                              database='AustenRiggs',
@@ -24,8 +24,8 @@ def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
             from datetime import datetime
             now = datetime.now()
             
-            mySql_insert_query = "INSERT INTO documents (name,hash,created_at) VALUES  (%s,%s,%s)"
-            val = (str(archivo),str(hash_file),str(now))
+            mySql_insert_query = "INSERT INTO documents (name,hash,created_at,id_user) VALUES  (%s,%s,%s,%s)"
+            val = (str(archivo),str(hash_file),str(now),str(user))
             cursor = connection.cursor()
             cursor.execute(mySql_insert_query,val)
             connection.commit()
@@ -37,6 +37,7 @@ def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
                 try:
                     mySql_insert_query = """SELECT idDocument 
                                     FROM documents
+                                    WHERE id_user = """ +str(user)+"""
                                     ORDER BY idDocument
                                     DESC LIMIT 1"""
                     cursor = connection.cursor()
@@ -50,8 +51,8 @@ def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
                             for index, item in data_dictionary.iterrows():
                                 total = total + 1
                                 try:
-                                    mySql_insert_query = "INSERT INTO DialogInterviews (content,idDocument,tagged) VALUES (%s,%s,'not tagged')" 
-                                    val = (str(item[texto]),str(r1))
+                                    mySql_insert_query = "INSERT INTO DialogInterviews (content,idDocument,tagged, id_user) VALUES (%s,%s,%s,%s)" 
+                                    val = (str(item[texto]),str(r1),'not tagged',str(user))
                                     cursor = connection.cursor()
                                     cursor.execute(mySql_insert_query,val)
                                     connection.commit()
@@ -66,8 +67,8 @@ def insert_data(data_dictionary, texto, tipo, archivo, hash_file):
                             for i in range(0,len(data_dictionary)):
                                 total = total + 1
                                 try:
-                                    mySql_insert_query = "INSERT INTO DialogInterviews (content,idDocument,tagged) VALUES (%s,%s,'not tagged')"
-                                    val = (str(data_dictionary[i]),str(r1))
+                                    mySql_insert_query = "INSERT INTO DialogInterviews (content,idDocument,tagged, id_user) VALUES (%s,%s,%s,%s)"
+                                    val = (str(data_dictionary[i]),str(r1),'not tagged', str(user))
                                     cursor = connection.cursor()
                                     cursor.execute(mySql_insert_query, val)
                                     connection.commit()

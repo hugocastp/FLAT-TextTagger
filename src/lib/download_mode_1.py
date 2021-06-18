@@ -15,7 +15,6 @@ import sys
 import download_mode_2
 nueva_colum = []
 
-
 def seleccionar_modo():
     if sys.argv[3] == 'optionone':
         ##############################      MODO 1      ######################################
@@ -38,7 +37,7 @@ def get_data(idDocu):
     for i in range(0, len(idDialog)):
         qry = """SELECT DISTINCT title FROM cat_tags, tagged_process, DialogInterviews
                             WHERE tagged_process.idDialogInterview = DialogInterviews.idDialogInterview AND
-                            tagged_process.id_cat_tag = cat_tags.id_cat_tag AND DialogInterviews.idDialogInterview ="""+ str(idDialog[i][0])
+                            tagged_process.id_cat_tag = cat_tags.id_cat_tag AND DialogInterviews.idDialogInterview ="""+ str(idDialog[i][0]) 
         lista_nombres = consultar_bd(qry) # vector con los nombres de las cat que se usan
         formatear_array(lista_nombres,nueva_colum)  # formatear tupla a un vector unidimencional
     nombre_arch = obtener_nombre_arch(idDocu) # obtener el nombre de archivo para guardado

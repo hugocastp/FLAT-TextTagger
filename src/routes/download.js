@@ -6,7 +6,7 @@ const fs = require('fs')
 const { PythonShell } = require('python-shell');
 
 router.get('/download', async (req, resp) => {
-    const documents = await pool.query('SELECT * FROM  documents');
+    const documents = await pool.query('SELECT * FROM  documents WHERE id_user = ?' ,[req.user.id]);
     resp.render('download/download', { documents });
 });
 

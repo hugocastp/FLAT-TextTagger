@@ -1,72 +1,47 @@
-
 body {
-    background: #F4F4F4;
-    font-family: 'Century Gothic',sans-serif;
+    background: #f5f6fa;
+font-family: 'Oswald', sans-serif;
+
+    overflow: hidden;
 }
 
-.index{
-    width: 100%;
-    height: 100%;
+.index {
+    width: 100vw;
+    height: 100vh;
 }
-.masthead{
+
+.navbar {
+    background: white !important;
+}
+
+.nav-link {
+    color: black !important;
+}
+
+.masthead {
     color: white;
-    min-height:  40em;
+    min-height: 30rem;
     width: 100%;
     height: 100%;
     padding-top: 8rem;
+    padding-bottom: 8rem;
     background: url('/img/fondo.jpg');
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.textarea {
-    background-color: #F4F4F4;
-    overflow:auto;
-    margin-bottom: 15px;
-}
-div.yellowI::selection{
-    background-color: #BE42ED;
-    color: white;
-}
-.lblSpan:hover{
-    cursor: pointer;
-    border: 1px dotted #fa0;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px #aaa;
-}
-.sectionInterview{
-    height:35rem;
-}
 
-.submitFilter{
-    background: lightgreen;
-}
-.submitFilter:hover{
-    background: lightsteelblue;
-}
-
-.loading{
-            width: 200px;
-            color: black;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .loading:before{
-        content: '';
-        animation: load 15s linear ;
+.masthead h1 {
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (min-width: 992px) {
+    .masthead {
+      height: 100vh;
     }
-.loading:before{
-    content: 'Archivo cargado';
-    font-size: 15px;
-}
-@keyframes load{
-    0%{content: 'Cargando archivo';}
-    10%{content: 'Cargando archivo.';}
-    20%{content: 'Cargando archivo..';}
-    30%{content: 'Cargando archivo...';}
-    40%{content: 'Cargando archivo....';}
-    50%{content: 'Cargando archivo.....';}
-    60%{content: 'Cargando archivo......';}
-    70%{content: 'Cargando archivo.......';}
-    80%{content: 'Cargando archivo........';}
-    85%{content: 'Archivo cargado';}
-}
+    .masthead h1 {
+      font-size: 5.5rem;
+    }
+  }

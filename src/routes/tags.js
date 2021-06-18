@@ -8,10 +8,11 @@ router.get('/add',(req,resp)=>{
 });
 //se envia en el header
 router.post('/add',async (req,resp)=>{
-    const {title, color} = req.body;
+    const {title, color, id_user} = req.body;
     const newtag ={
         title,
-        color
+        color,
+        id_user: req.user.id
     };
     console.log(newtag);
     await pool.query('INSERT INTO cat_tags set ?',[newtag]);
@@ -20,7 +21,7 @@ router.post('/add',async (req,resp)=>{
 });
 
 router.get('/',async (req,res)=>{
-    const tags = await pool.query('SELECT * FROM  cat_tags');
+    const tags = await pool.query('SELECT * FROM  cat_tags WHERE id_user = ?' ,[req.user.id]);
     console.log(tags)
     res.render('tags/list',{tags});
 });

@@ -8,7 +8,7 @@ import sys
 import json
 from nested_lookup import nested_lookup
 import os, sys, stat
-
+user = sys.argv[3]
 
 def colum_mas_grande(data):
     primeros_registros = data.head()
@@ -85,7 +85,7 @@ def detectar_errores(tipo):
         hashfile = hash_file()
         # print(archivo)
         # insertar si todo sale bien sin errores
-        insert_to_db.insert_data(data, texto, tipo, archivo, hashfile)
+        insert_to_db.insert_data(data, texto, tipo, archivo, hashfile, user)
 
     except FileNotFoundError:
         print("Error: el directorio del archivo", sys.argv[1], "no existe.")
@@ -98,7 +98,7 @@ def detectar_errores(tipo):
             texto = colum_mas_grande(data)
             archivo = path_leaf(sys.argv[1])
             hashfile = hash_file()
-            insert_to_db.insert_data(data, texto, tipo, archivo, hashfile)
+            insert_to_db.insert_data(data, texto, tipo, archivo, hashfile, user)
         
 
 

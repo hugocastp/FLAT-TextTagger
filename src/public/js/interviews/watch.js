@@ -173,7 +173,7 @@ function addNewTag(tags, srcElement, category, color) {
       let positionCase = 0;
       let lengCase = indexes.length;
       //console.log("INDEXES: "+indexes);
-
+      console.log(sentence);
       for(let j=0;j<lengCase;j++){
         if(indexes[j]== position){
           positionCase = j;      
@@ -193,7 +193,7 @@ function addNewTag(tags, srcElement, category, color) {
         }else if(sentence.indexOf(selectedText) == position) {
               sentence = sentence.replace(selectedText," "+position+" ");  
       }
-  
+      console.log("CONSOLE 2"+sentence);
   }
   parts = sentence.split(" ");
   for (j=0; j < parts.length; j++){

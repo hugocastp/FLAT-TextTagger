@@ -15,28 +15,23 @@ router.get('/add', (req,resp)=>{
 });
 
 router.post('/add', async (req,resp)=>{
-    var form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm();
     form.parse(req, async function (err, fields, files) {
         if(files.filename.name != ""){
             filename = files.filename.name;
             var filetype = filename.split(".")[1]
-            //var csv_sep = fields.sep;
             var oldpath = files.filename.path;
- 
             var newpath = 'src/files/originalfiles/' + filename;
-            //console.log(filename,filetype,csv_sep)
             mv(oldpath, newpath, function(err){
                 if (err) throw err;
             });
 
             let options = {
                         mode: 'text',
-                        //pythonPath: '/path/to/python/bin/python3.7',
-                        //pythonOptions: ['-u'], // get print results in real-time
                         scriptPath: 'src/lib/',
                         args: [newpath]
                     };
-                //console.log(options)
+
                 const result = await new Promise((resolve, reject) => {
                     PythonShell.run('show_headers.py', options, function (err, results) {
                       if (err) throw err;
@@ -57,10 +52,8 @@ router.post('/add', async (req,resp)=>{
         if(fields.opts != "" && fields.fname != ""){
             let options = {
                 mode: 'text',
-                //pythonPath: '/path/to/python/bin/python3.7',
-                //pythonOptions: ['-u'], // get print results in real-time
                 scriptPath: 'src/lib/',
-                args: [fields.fname, fields.opts]
+                args: [fields.fname, fields.opts, req.user.id]
             };
             //console.log(options)
             const result = await new Promise((resolve, reject) => {

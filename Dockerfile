@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:12-slim
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -11,10 +11,10 @@ COPY package*.json ./
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
-
 RUN apt-get update && apt-get install -y python3-pip
 RUN pip3 install pandas python-shell mysql-connector-python openpyxl nested-lookup
 # Bundle app source
 COPY . .
 
 EXPOSE 4000
+CMD [ "npm", "run", "start.dev" ]

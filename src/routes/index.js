@@ -1,14 +1,8 @@
 const express = require('express');
-const router=express.Router();
+const router = express.Router();
 
-router.get('/',(req,res)=>{
+router.get('/', async (req, res) => {
     res.render('index');
 });
- 
-/* 
-router.get('/contact.html',(req,res)=>{
-    res.render('contact.html',{title:'contact page'});
-}); */
 
-
-module.exports = router; 
+module.exports = router;

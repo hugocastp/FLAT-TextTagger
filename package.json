@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index"
+    "start": "nodemon src/index",
+    "start.dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "express-handlebars": "^4.0.3",
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.1",
+    "express-validator": "^5.1.2",
     "formidable": "^1.2.2",
     "jade": "^1.11.0",
     "jquery": "^3.5.1",
@@ -40,6 +42,8 @@
     "nodemon": "^2.0.7"
   },
   "nodemonConfig": {
-    "ignore": ["*.json"]
- }
+    "ignore": [
+      "*.json"
+    ]
+  }
 }

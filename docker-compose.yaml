@@ -5,9 +5,10 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: .
-    container_name: etiquetador
+    container_name: etiquetador-login
     ports:
       - 80:4000
+      #80:4000
     command: npm start
     depends_on:
       - db
@@ -30,6 +31,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+      #80:8080
 
 volumes: 
   db_volume:
