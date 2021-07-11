@@ -9,6 +9,7 @@ const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(session);
 const { database } = require('./keys');
 const app = express();
+const fileUpload = require('express-fileupload');
 require('./lib/passport');
 
 //Settings
@@ -23,10 +24,18 @@ app.engine('.hbs', exphbs({
 }))
 app.set('view engine', '.hbs');
 
+// default option
+app.use(fileUpload());
+
+// Static Files
+app.use(express.static('public'));
+app.use(express.static('upload'));
+
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+
 
 var sessionStore = new MySQLStore(database);
 app.use(session({
@@ -53,14 +62,15 @@ app.use((req, res, next) => {
 //Routes
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
+app.use(require('./routes/profile'));
 app.use('/tags',require('./routes/tags')); 
 app.use('/interviews',require('./routes/interviews'));
 app.use('/load',require('./routes/load'));
 app.use('/download',require('./routes/download'));
 
-
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Starting the server
 app.listen(app.get('port'),()=>{

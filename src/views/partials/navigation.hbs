@@ -26,9 +26,19 @@
         <li class="nav-item">
           <a class="nav-link" href="/interviews/all">Mis textos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Cerrar sesión</a>
+       
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Perfil
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="nav-link" href="/profile/{{user.id}}">Editar perfil</a>
+            <div class="dropdown-divider"></div>
+             <a class="nav-link" href="/logout">Cerrar sesión</a>
+          </div>
         </li>
+        
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/signin">Iniciar sesión</a>

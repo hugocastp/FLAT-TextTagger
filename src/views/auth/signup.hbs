@@ -10,16 +10,33 @@
         <div class="card-header">
           <h3>Registrarse</h3>
         </div>
+          <div class="card">
+          {{#each rows}}
+
+                {{#if this.profile_image}}
+                  <img class="card__image" src="{{this.profile_image}}" loading="lazy" alt="User Profile">
+                {{else}}
+                  <img class="card__image" src="./public/img/default.jpg" loading="lazy" alt="User Profile">
+                {{/if}}
+        
+          {{/each}}
+        </div>
+        
+        </form>
         <div class="card-body">
-          <form action="/signup" method="POST">
+          <form action="/signup" method="POST", encType="multipart/form-data" >
             <div class="form-group">
-              <input type="type" name="fullname" placeholder="Nombre completo" class="form-control" autofocus>
+               <h3>Upload Profile Photo</h3>
+               <input type="file" name="profile_image" accept="image/*" autofocus required/>
             </div>
             <div class="form-group">
-              <input type="text" name="username" placeholder="Usuario" class="form-control">
+              <input type="type" name="fullname" placeholder="Nombre completo" class="form-control" autofocus required>
             </div>
             <div class="form-group">
-              <input type="password" name="password" placeholder="Contraseña" class="form-control">
+              <input type="text" name="username" placeholder="Usuario" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
             </div>
             <div class="form-group">
               <button class="btn btn-success btn-block">

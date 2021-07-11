@@ -31,7 +31,7 @@ router.get('/delete/:id/',async (req,resp)=>{
     resp.send('Deleted'); */
     const {id} = req.params;
     await pool.query('DELETE FROM cat_tags WHERE id_cat_tag =?',[id]);
-    req.flash('success','Categoría eliminada satisfactoriamentey');
+    req.flash('success','Categoría eliminada satisfactoriamente');
     resp.redirect('/tags');
 });
 router.get('/edit/:id/',async (req,resp)=>{
