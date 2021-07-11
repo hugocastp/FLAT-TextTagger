@@ -27,34 +27,13 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-    let sampleFile;
-    let uploadPath;
     
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
-    }
-    console.log("REQFILES "+req.files);
-    // name of the input is sampleFile
-    sampleFile = req.files.sampleFile;
-    uploadPath = __dirname + '/upload/' + sampleFile.name;
-  
-    // Use mv() to place file on the server
-    sampleFile.mv(uploadPath, function (err) {
-      if (err) return res.status(500).send(err);
-      console.log('Correctr! '+uploadPath);
-      res.send('File uploaded');
-    });
- 
   const { fullname } = req.body;
-  let profile_image = uploadPath;
 
-  console.log("FULLNAME "+fullname);
-  console.log("uploadPath "+profile_image);
   let newUser = {
     fullname,
     username,
-    password,
-    profile_image
+    password
   };
   newUser.password = await helpers.encryptPassword(password);
   // Saving in the Database
