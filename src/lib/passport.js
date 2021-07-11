@@ -1,6 +1,5 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
 const pool = require('../databaseInterviews');
 const helpers = require('./helpers');
 
@@ -28,8 +27,9 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-
+ 
   const { fullname } = req.body;
+
   let newUser = {
     fullname,
     username,

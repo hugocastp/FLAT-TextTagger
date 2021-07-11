@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <a class="navbar-brand" href="/" style=" color: #BE42ED; font-size: 1.2em"> <img src="/img/fondoCinvest.png" height="38" width="38"> Etiquetador gratuito</a>
+      <a class="navbar-brand" href="/" style=" color: #2A0055; font-size: 1.2em"> <img src="/img/fondoCinvest.png" height="38" width="38"> Etiquetador gratuito</a>
     </a>
      <div class="col-sm-2">
       <button type="button" class="btn hiddenitem"  onclick="window.location.href='/interviews/all'">
-    <svg xmlns="http://www.w3.org/2000/svg"  style=" color: #BE42ED;"  width="35" height="35" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg"  style=" color: #2A0055;"  width="35" height="35" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
     </svg>
     <span class="visually-hidden"> </span>
@@ -21,14 +21,24 @@
         {{#if user}}
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../load/add">Agregar documento</a>
+          <a class="nav-link" href="/load/add">Agregar documento</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/interviews/all">Mis textos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Cerrar sesión</a>
+       
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" href="/profile/{{user.id}}" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+           Hola, {{user.fullname}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+             <a class="nav-link" href="/profile/{{user.id}}">Editar perfil</a>
+             <a class="nav-link" href="/logout">Cerrar sesión</a>
+            
         </li>
+        
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/signin">Iniciar sesión</a>

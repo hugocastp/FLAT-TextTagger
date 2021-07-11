@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: .
-    container_name: etiquetador-login
+    container_name: etiquetador-login-lite
     ports:
       - 80:4000
       #80:4000

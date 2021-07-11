@@ -1,0 +1,76 @@
+
+<style>
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 0 20%;
+  position: relative;
+  margin: .5em;
+  padding: 1em;
+  background: white;
+  border: 1px solid grey;
+}
+
+.active { border-color: orangered; }
+
+/* This is where the magic happens */
+input[type="checkbox"] {
+  position: absolute;
+  top: .5em;
+  left:.5em;
+}
+
+@media (pointer: coarse) { 
+  input[type="checkbox"] {
+    height: 2em;
+    width: 2em;
+  }
+}
+
+/* Use z-index to make it accessible to keyboard navigation */
+@media (hover: hover) {
+              input[type="checkbox"] { z-index: -1 }
+  .card:hover input[type="checkbox"],
+              input[type="checkbox"]:focus,
+              input[type="checkbox"]:checked { z-index: auto }
+}
+
+
+
+</style>
+
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Actualizar información</h3>
+        </div>
+        <div class="card-body">
+          <form action="/profile/{{user.id}}" method="POST">
+            <div class="form-group">
+              <input type="type" name="fullname" value="{{user.fullname}}" placeholder="Nombre completo" class="form-control" autofocus required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="username" value="{{user.username}}" placeholder="Usuario" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
+            <div class="form-group">
+              </br>
+              <button class="btn btn-success btn-block">
+                Guardar cambios
+              </button>
+              <a href="/interviews/all" class="btn btn-danger btn-block">Cancelar</a>
+            </div>       
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -28,6 +28,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
+
 var sessionStore = new MySQLStore(database);
 app.use(session({
     secret: 'mainsession',
@@ -53,14 +54,15 @@ app.use((req, res, next) => {
 //Routes
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
+app.use(require('./routes/profile'));
 app.use('/tags',require('./routes/tags')); 
 app.use('/interviews',require('./routes/interviews'));
 app.use('/load',require('./routes/load'));
 app.use('/download',require('./routes/download'));
 
-
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Starting the server
 app.listen(app.get('port'),()=>{
