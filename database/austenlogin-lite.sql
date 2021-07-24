@@ -135,7 +135,8 @@ ALTER TABLE `tagged_process`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY(`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -179,14 +180,14 @@ ALTER TABLE `users`
 -- Constraints for table `cat_tags`
 --
 ALTER TABLE `cat_tags`
-  ADD CONSTRAINT `cat_tags_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cat_tags_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `DialogInterviews`
 --
 ALTER TABLE `DialogInterviews`
   ADD CONSTRAINT `DialogInterviews_ibfk_1` FOREIGN KEY (`idDocument`) REFERENCES `documents` (`idDocument`) ON DELETE CASCADE,
-  ADD CONSTRAINT `DialogInterviews_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `DialogInterviews_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `documents`
